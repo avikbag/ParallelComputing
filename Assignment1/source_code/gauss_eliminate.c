@@ -16,6 +16,7 @@
 
 #define MIN_NUMBER 2
 #define MAX_NUMBER 50
+#define NUM_THREADS 8
 
 extern int compute_gold(float*, const float*, unsigned int);
 Matrix allocate_matrix(int num_rows, int num_columns, int init);
@@ -46,14 +47,14 @@ int main(int argc, char** argv) {
 		
 	/* Gaussian elimination using the reference code. */
 	Matrix reference = allocate_matrix(MATRIX_SIZE, MATRIX_SIZE, 0);
-	struct timeval start, stop;	
+	struct timeval start, stop1, stop2;	
 	gettimeofday(&start, NULL);
 
 	printf("Performing gaussian elimination using the reference code. \n");
 	int status = compute_gold(reference.elements, A.elements, A.num_rows);
 
-	gettimeofday(&stop, NULL);
-	printf("CPU run time = %0.2f s. \n", (float)(stop.tv_sec - start.tv_sec + (stop.tv_usec - start.tv_usec)/(float)1000000));
+	gettimeofday(&stop1, NULL);
+	printf("CPU run time = %0.2f s. \n", (float)(stop1.tv_sec - start.tv_sec + (stop1.tv_usec - start.tv_usec)/(float)1000000));
 
 	if(status == 0){
 		printf("Failed to convert given matrix to upper triangular. Try again. Exiting. \n");
@@ -74,8 +75,8 @@ int main(int argc, char** argv) {
 	printf("Performing gaussian elimination using the OpenMP code. \n");
 	gauss_eliminate_using_openmp(A, U);
 
-	gettimeofday(&stop, NULL);
-	printf("CPU run time = %0.2f s. \n", (float)(stop.tv_sec - start.tv_sec + (stop.tv_usec - start.tv_usec)/(float)1000000));
+	gettimeofday(&stop2, NULL);
+	printf("CPU run time = %0.2f s. \n", (float)(stop2.tv_sec - stop1.tv_sec + (stop2.tv_usec - stop1.tv_usec)/(float)1000000));
 
 	/* check if the OpenMP result is equivalent to the expected solution. */
 	int size = MATRIX_SIZE*MATRIX_SIZE;
@@ -94,9 +95,10 @@ void gauss_eliminate_using_openmp(const Matrix A, Matrix U)
 {
   unsigned int i, j, k;
   unsigned int num_elements = A.num_rows;
-
+  omp_set_num_threads(NUM_THREADS);
   // Copying over from matrix A to U
   for (i = 0; i < num_elements; i++)
+    #pragma omp parallel for default(none) private(j) shared(U, num_elements, i)
     for(j = 0; j < num_elements; j++)
       U.elements[num_elements * i + j] = A.elements[num_elements * i + j];
 
@@ -105,6 +107,7 @@ void gauss_eliminate_using_openmp(const Matrix A, Matrix U)
   for(k = 0; k < num_elements; k++)
   {
     // Reduce the current row
+    #pragma omp parallel for default(none) private(j) shared(U, num_elements, k)
     for(j = (k+1); j < num_elements; j++){
       if(U.elements[num_elements * k + k] == 0){
         printf("Numerical instability detected. The principal diagonal is 0");
@@ -117,6 +120,7 @@ void gauss_eliminate_using_openmp(const Matrix A, Matrix U)
     // Set principal diagonal to be 1
     U.elements[num_elements * k + k] = 1;
 
+    #pragma omp parallel for default(none) private(i, j) shared(U, num_elements, k)
     for (i = (k + 1); i < num_elements; i++){
       for (j = (k + 1); j < num_elements; j++)
         U.elements[num_elements * i + j] = U.elements[num_elements * i + j] -\
