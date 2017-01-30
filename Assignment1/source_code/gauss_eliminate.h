@@ -1,7 +1,8 @@
 #ifndef _MATRIXMUL_H_
 #define _MATRIXMUL_H_
 
-#define MATRIX_SIZE 2048
+// Using gcc preprocessor to set macro
+//#define MATRIX_SIZE 2048
 
 #define NUM_COLUMNS MATRIX_SIZE             /* Number of columns in Matrix A. */
 #define NUM_ROWS MATRIX_SIZE                /* Number of rows in Matrix A. */
