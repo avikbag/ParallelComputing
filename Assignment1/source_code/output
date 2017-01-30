@@ -1,6 +1,0 @@
-Performing gaussian elimination using the reference code. 
-CPU run time = 239.94 s. 
-Gaussian elimination using the reference code was successful. 
-Performing gaussian elimination using the OpenMP code. 
-CPU run time = 38.65 s. 
-Test PASSED
