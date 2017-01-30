@@ -5,7 +5,7 @@ THREADS=-D NUM_THREADS=
 MATRIX=-D MATRIX_SIZE=
 
 main:
-	$(CC) $(CFLAGS) gauss_eliminate gauss_eliminate.c compute_gold.c $(THREADS)4 $(MATRIX)8192
+	$(CC) $(CFLAGS) gauss_eliminate gauss_eliminate.c compute_gold.c $(THREADS)4 $(MATRIX)4096
 
 # This is for my personal machine running 
 # gcc version 6 with openMP support
