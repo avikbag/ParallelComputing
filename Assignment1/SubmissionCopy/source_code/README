@@ -1,0 +1,9 @@
+To run files, simply compile using the following command, 
+  make
+
+This will create and executable called gauss_eliminate. 
+To run the executable, run this command, 
+  ./gauss_eliminate
+
+It should output the test case for 4 threads for a matrix
+size of 4096
