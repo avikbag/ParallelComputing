@@ -144,7 +144,7 @@ void compute_using_openmp(int *input_data, int *histogram, int num_elements, int
     // Since this is a critical block, it is wrapped within a pragma critical
     // to ensure that when it's performing it's merge operation, no other thread
     // is interfering. 
-    #pragma critial
+    #pragma omp critical
     {
       for(i = 0; i < histogram_size; i++)
         histogram[i] += partial[id][i];

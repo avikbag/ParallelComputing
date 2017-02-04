@@ -3,12 +3,12 @@ gcc-6 -std=c99 -fopenmp -lm -o histogram histogram.c -D NUM_THREADS=2
 ______________________________________________________________________
 ___________ Thread Count: 2, Input_data size:1000000 ______________
 Creating the reference histogram. 
-CPU run time = 0.0025760 s. 
+CPU run time = 0.0023390 s. 
 Number of histogram entries = 1000000. 
 Histogram generated successfully. 
 
 Creating histogram using OpenMP. 
-CPU run time = 0.0018230 s. 
+CPU run time = 0.0019290 s. 
 Number of histogram entries = 1000000. 
 Histogram generated successfully. 
 Difference between the reference and OpenMP results: 0.000000. 
@@ -19,12 +19,12 @@ gcc-6 -std=c99 -fopenmp -lm -o histogram histogram.c -D NUM_THREADS=2
 ______________________________________________________________________
 ___________ Thread Count: 2, Input_data size:10000000 ______________
 Creating the reference histogram. 
-CPU run time = 0.0217170 s. 
+CPU run time = 0.0248530 s. 
 Number of histogram entries = 10000000. 
 Histogram generated successfully. 
 
 Creating histogram using OpenMP. 
-CPU run time = 0.0167150 s. 
+CPU run time = 0.0176180 s. 
 Number of histogram entries = 10000000. 
 Histogram generated successfully. 
 Difference between the reference and OpenMP results: 0.000000. 
@@ -35,12 +35,12 @@ gcc-6 -std=c99 -fopenmp -lm -o histogram histogram.c -D NUM_THREADS=2
 ______________________________________________________________________
 ___________ Thread Count: 2, Input_data size:100000000 ______________
 Creating the reference histogram. 
-CPU run time = 0.2307810 s. 
+CPU run time = 0.2543640 s. 
 Number of histogram entries = 100000000. 
 Histogram generated successfully. 
 
 Creating histogram using OpenMP. 
-CPU run time = 0.1716500 s. 
+CPU run time = 0.1738860 s. 
 Number of histogram entries = 100000000. 
 Histogram generated successfully. 
 Difference between the reference and OpenMP results: 0.000000. 
@@ -51,12 +51,12 @@ gcc-6 -std=c99 -fopenmp -lm -o histogram histogram.c -D NUM_THREADS=4
 ______________________________________________________________________
 ___________ Thread Count: 4, Input_data size:1000000 ______________
 Creating the reference histogram. 
-CPU run time = 0.0022570 s. 
+CPU run time = 0.0025690 s. 
 Number of histogram entries = 1000000. 
 Histogram generated successfully. 
 
 Creating histogram using OpenMP. 
-CPU run time = 0.0011850 s. 
+CPU run time = 0.0012390 s. 
 Number of histogram entries = 1000000. 
 Histogram generated successfully. 
 Difference between the reference and OpenMP results: 0.000000. 
@@ -67,12 +67,12 @@ gcc-6 -std=c99 -fopenmp -lm -o histogram histogram.c -D NUM_THREADS=4
 ______________________________________________________________________
 ___________ Thread Count: 4, Input_data size:10000000 ______________
 Creating the reference histogram. 
-CPU run time = 0.0230900 s. 
+CPU run time = 0.0231090 s. 
 Number of histogram entries = 10000000. 
 Histogram generated successfully. 
 
 Creating histogram using OpenMP. 
-CPU run time = 0.0091900 s. 
+CPU run time = 0.0091130 s. 
 Number of histogram entries = 10000000. 
 Histogram generated successfully. 
 Difference between the reference and OpenMP results: 0.000000. 
@@ -83,12 +83,12 @@ gcc-6 -std=c99 -fopenmp -lm -o histogram histogram.c -D NUM_THREADS=4
 ______________________________________________________________________
 ___________ Thread Count: 4, Input_data size:100000000 ______________
 Creating the reference histogram. 
-CPU run time = 0.2431560 s. 
+CPU run time = 0.2403050 s. 
 Number of histogram entries = 100000000. 
 Histogram generated successfully. 
 
 Creating histogram using OpenMP. 
-CPU run time = 0.1092190 s. 
+CPU run time = 0.1031950 s. 
 Number of histogram entries = 100000000. 
 Histogram generated successfully. 
 Difference between the reference and OpenMP results: 0.000000. 
@@ -99,15 +99,15 @@ gcc-6 -std=c99 -fopenmp -lm -o histogram histogram.c -D NUM_THREADS=8
 ______________________________________________________________________
 ___________ Thread Count: 8, Input_data size:1000000 ______________
 Creating the reference histogram. 
-CPU run time = 0.0028560 s. 
+CPU run time = 0.0021850 s. 
 Number of histogram entries = 1000000. 
 Histogram generated successfully. 
 
 Creating histogram using OpenMP. 
-CPU run time = 0.0013280 s. 
-Number of histogram entries = 994025. 
-Error generating histogram. 
-Difference between the reference and OpenMP results: 5975.000000. 
+CPU run time = 0.0015880 s. 
+Number of histogram entries = 1000000. 
+Histogram generated successfully. 
+Difference between the reference and OpenMP results: 0.000000. 
 _______________________________________________________________
 
 gcc-6 -std=c99 -fopenmp -lm -o histogram histogram.c -D NUM_THREADS=8
@@ -115,12 +115,12 @@ gcc-6 -std=c99 -fopenmp -lm -o histogram histogram.c -D NUM_THREADS=8
 ______________________________________________________________________
 ___________ Thread Count: 8, Input_data size:10000000 ______________
 Creating the reference histogram. 
-CPU run time = 0.0262900 s. 
+CPU run time = 0.0236880 s. 
 Number of histogram entries = 10000000. 
 Histogram generated successfully. 
 
 Creating histogram using OpenMP. 
-CPU run time = 0.0097660 s. 
+CPU run time = 0.0085150 s. 
 Number of histogram entries = 10000000. 
 Histogram generated successfully. 
 Difference between the reference and OpenMP results: 0.000000. 
@@ -131,12 +131,12 @@ gcc-6 -std=c99 -fopenmp -lm -o histogram histogram.c -D NUM_THREADS=8
 ______________________________________________________________________
 ___________ Thread Count: 8, Input_data size:100000000 ______________
 Creating the reference histogram. 
-CPU run time = 0.2379950 s. 
+CPU run time = 0.2380310 s. 
 Number of histogram entries = 100000000. 
 Histogram generated successfully. 
 
 Creating histogram using OpenMP. 
-CPU run time = 0.0959770 s. 
+CPU run time = 0.0928450 s. 
 Number of histogram entries = 100000000. 
 Histogram generated successfully. 
 Difference between the reference and OpenMP results: 0.000000. 
@@ -147,12 +147,12 @@ gcc-6 -std=c99 -fopenmp -lm -o histogram histogram.c -D NUM_THREADS=16
 ______________________________________________________________________
 ___________ Thread Count: 16, Input_data size:1000000 ______________
 Creating the reference histogram. 
-CPU run time = 0.0024190 s. 
+CPU run time = 0.0024310 s. 
 Number of histogram entries = 1000000. 
 Histogram generated successfully. 
 
 Creating histogram using OpenMP. 
-CPU run time = 0.0018180 s. 
+CPU run time = 0.0018190 s. 
 Number of histogram entries = 1000000. 
 Histogram generated successfully. 
 Difference between the reference and OpenMP results: 0.000000. 
@@ -163,12 +163,12 @@ gcc-6 -std=c99 -fopenmp -lm -o histogram histogram.c -D NUM_THREADS=16
 ______________________________________________________________________
 ___________ Thread Count: 16, Input_data size:10000000 ______________
 Creating the reference histogram. 
-CPU run time = 0.0255790 s. 
+CPU run time = 0.0250580 s. 
 Number of histogram entries = 10000000. 
 Histogram generated successfully. 
 
 Creating histogram using OpenMP. 
-CPU run time = 0.0107980 s. 
+CPU run time = 0.0089270 s. 
 Number of histogram entries = 10000000. 
 Histogram generated successfully. 
 Difference between the reference and OpenMP results: 0.000000. 
@@ -179,12 +179,12 @@ gcc-6 -std=c99 -fopenmp -lm -o histogram histogram.c -D NUM_THREADS=16
 ______________________________________________________________________
 ___________ Thread Count: 16, Input_data size:100000000 ______________
 Creating the reference histogram. 
-CPU run time = 0.2750850 s. 
+CPU run time = 0.2372250 s. 
 Number of histogram entries = 100000000. 
 Histogram generated successfully. 
 
 Creating histogram using OpenMP. 
-CPU run time = 0.1278520 s. 
+CPU run time = 0.1056280 s. 
 Number of histogram entries = 100000000. 
 Histogram generated successfully. 
 Difference between the reference and OpenMP results: 0.000000. 
