@@ -1,10 +1,10 @@
 COMPILERH=gcc-6
 COMPILER=gcc
 CFLAGS=-std=c99 -fopenmp -lm -o
-ARGS=10000000
+ARGS=100000000
 THREADS=-D NUM_THREADS=
 main:
-	$(COMPILER) $(CFLAGS) histogram histogram.c $(THREADS)4
+	$(COMPILER) $(CFLAGS) histogram histogram.c $(THREADS)16
 	./histogram $(ARGS)
 
 ## Test case on xunil
