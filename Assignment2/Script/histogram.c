@@ -118,15 +118,15 @@ void compute_using_openmp(int *input_data, int *histogram, int num_elements, int
 	// This is used to create the partial sum matrix. The first index 
   // refers to the thread id of the process. Based on that id, it will
   // split the input_data to the resective sizes depending on the number
-  // of threads assigned
+  // of threads assigned. The second index refers to the bins.
   int **partial = (int **)malloc(NUM_THREADS * sizeof(int *));
-	for( int i = 0; i < NUM_THREADS; i++ )
+	for(i = 0; i < NUM_THREADS; i++ )
 		partial[i] = (int *)malloc(histogram_size * sizeof(int));
 	
 	// Initializing the partial sum matrix
-  #pragma for 
-	for( int i = 0; i < NUM_THREADS; i++ )
-		for( int j = 0; j < histogram_size; j++ )
+  #pragma omp parallel for private(i, j) shared(histogram_size, partial)
+	for(i = 0; i < NUM_THREADS; i++ )
+		for(j = 0; j < histogram_size; j++ )
 			partial[i][j] = 0;
   
 	// This splits up the input_data into the number of threads assigned, 
