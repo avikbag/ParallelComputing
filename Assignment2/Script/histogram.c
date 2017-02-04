@@ -124,6 +124,7 @@ void compute_using_openmp(int *input_data, int *histogram, int num_elements, int
 		partial[i] = (int *)malloc(histogram_size * sizeof(int));
 	
 	// Initializing the partial sum matrix
+  #pragma for 
 	for( int i = 0; i < NUM_THREADS; i++ )
 		for( int j = 0; j < histogram_size; j++ )
 			partial[i][j] = 0;
