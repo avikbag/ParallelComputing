@@ -1,0 +1,183 @@
+l-05 sourceCode]$ make test
+gcc -o gauss gauss_eliminate.c compute_gold.c -lpthread -std=c99 -w -lm -D MATRIX_SIZE=1024 -D NUM_THREADS=2
+./gauss
+
+Performing gaussian elimination using the reference code.
+CPU run time = 2.73 s.
+Single-threaded Gaussian elimination was successful.
+
+Performing gaussian elimination using the pthread implementation.
+CPU run time = 1.51 s.
+Multi-threaded Gaussian elimination was successful.
+
+Test PASSED
+gcc -o gauss gauss_eliminate.c compute_gold.c -lpthread -std=c99 -w -lm -D MATRIX_SIZE=2048 -D NUM_THREADS=2
+./gauss
+
+Performing gaussian elimination using the reference code.
+CPU run time = 22.29 s.
+Single-threaded Gaussian elimination was successful.
+
+Performing gaussian elimination using the pthread implementation.
+CPU run time = 11.08 s.
+Multi-threaded Gaussian elimination was successful.
+
+Test PASSED
+gcc -o gauss gauss_eliminate.c compute_gold.c -lpthread -std=c99 -w -lm -D MATRIX_SIZE=4096 -D NUM_THREADS=2
+./gauss
+
+Performing gaussian elimination using the reference code.
+CPU run time = 185.52 s.
+Single-threaded Gaussian elimination was successful.
+
+Performing gaussian elimination using the pthread implementation.
+CPU run time = 87.88 s.
+Multi-threaded Gaussian elimination was successful.
+
+Test PASSED
+gcc -o gauss gauss_eliminate.c compute_gold.c -lpthread -std=c99 -w -lm -D MATRIX_SIZE=1024 -D NUM_THREADS=4
+./gauss
+
+Performing gaussian elimination using the reference code.
+CPU run time = 2.62 s.
+Single-threaded Gaussian elimination was successful.
+
+Performing gaussian elimination using the pthread implementation.
+CPU run time = 0.90 s.
+Multi-threaded Gaussian elimination was successful.
+
+Test PASSED
+gcc -o gauss gauss_eliminate.c compute_gold.c -lpthread -std=c99 -w -lm -D MATRIX_SIZE=2048 -D NUM_THREADS=4
+./gauss
+
+Performing gaussian elimination using the reference code.
+CPU run time = 22.46 s.
+Single-threaded Gaussian elimination was successful.
+
+Performing gaussian elimination using the pthread implementation.
+CPU run time = 5.90 s.
+Multi-threaded Gaussian elimination was successful.
+
+Test PASSED
+gcc -o gauss gauss_eliminate.c compute_gold.c -lpthread -std=c99 -w -lm -D MATRIX_SIZE=4096 -D NUM_THREADS=4
+./gauss
+
+Performing gaussian elimination using the reference code.
+CPU run time = 179.52 s.
+Single-threaded Gaussian elimination was successful.
+
+Performing gaussian elimination using the pthread implementation.
+CPU run time = 45.86 s.
+Multi-threaded Gaussian elimination was successful.
+
+Test PASSED
+gcc -o gauss gauss_eliminate.c compute_gold.c -lpthread -std=c99 -w -lm -D MATRIX_SIZE=1024 -D NUM_THREADS=8
+./gauss
+
+Performing gaussian elimination using the reference code.
+CPU run time = 2.83 s.
+Single-threaded Gaussian elimination was successful.
+
+Performing gaussian elimination using the pthread implementation.
+CPU run time = 0.74 s.
+Multi-threaded Gaussian elimination was successful.
+
+Test PASSED
+gcc -o gauss gauss_eliminate.c compute_gold.c -lpthread -std=c99 -w -lm -D MATRIX_SIZE=2048 -D NUM_THREADS=8
+./gauss
+
+Performing gaussian elimination using the reference code.
+CPU run time = 21.98 s.
+Single-threaded Gaussian elimination was successful.
+
+Performing gaussian elimination using the pthread implementation.
+CPU run time = 3.64 s.
+Multi-threaded Gaussian elimination was successful.
+
+Test PASSED
+gcc -o gauss gauss_eliminate.c compute_gold.c -lpthread -std=c99 -w -lm -D MATRIX_SIZE=4096 -D NUM_THREADS=8
+./gauss
+
+Performing gaussian elimination using the reference code.
+CPU run time = 183.53 s.
+Single-threaded Gaussian elimination was successful.
+
+Performing gaussian elimination using the pthread implementation.
+CPU run time = 26.50 s.
+Multi-threaded Gaussian elimination was successful.
+
+Test PASSED
+gcc -o gauss gauss_eliminate.c compute_gold.c -lpthread -std=c99 -w -lm -D MATRIX_SIZE=1024 -D NUM_THREADS=16
+./gauss
+
+Performing gaussian elimination using the reference code.
+CPU run time = 2.83 s.
+Single-threaded Gaussian elimination was successful.
+
+Performing gaussian elimination using the pthread implementation.
+CPU run time = 1.00 s.
+Multi-threaded Gaussian elimination was successful.
+
+Test PASSED
+gcc -o gauss gauss_eliminate.c compute_gold.c -lpthread -std=c99 -w -lm -D MATRIX_SIZE=2048 -D NUM_THREADS=16
+./gauss
+
+Performing gaussian elimination using the reference code.
+CPU run time = 22.54 s.
+Single-threaded Gaussian elimination was successful.
+
+Performing gaussian elimination using the pthread implementation.
+CPU run time = 3.87 s.
+Multi-threaded Gaussian elimination was successful.
+
+Test PASSED
+gcc -o gauss gauss_eliminate.c compute_gold.c -lpthread -std=c99 -w -lm -D MATRIX_SIZE=4096 -D NUM_THREADS=16
+./gauss
+
+Performing gaussian elimination using the reference code.
+CPU run time = 181.50 s.
+Single-threaded Gaussian elimination was successful.
+
+Performing gaussian elimination using the pthread implementation.
+CPU run time = 23.73 s.
+Multi-threaded Gaussian elimination was successful.
+
+Test PASSED
+gcc -o gauss gauss_eliminate.c compute_gold.c -lpthread -std=c99 -w -lm -D MATRIX_SIZE=1024 -D NUM_THREADS=32
+./gauss
+
+Performing gaussian elimination using the reference code.
+CPU run time = 2.76 s.
+Single-threaded Gaussian elimination was successful.
+
+Performing gaussian elimination using the pthread implementation.
+CPU run time = 1.57 s.
+Multi-threaded Gaussian elimination was successful.
+
+Test PASSED
+gcc -o gauss gauss_eliminate.c compute_gold.c -lpthread -std=c99 -w -lm -D MATRIX_SIZE=2048 -D NUM_THREADS=32
+./gauss
+
+Performing gaussian elimination using the reference code.
+CPU run time = 22.49 s.
+Single-threaded Gaussian elimination was successful.
+
+Performing gaussian elimination using the pthread implementation.
+CPU run time = 4.64 s.
+Multi-threaded Gaussian elimination was successful.
+
+Test PASSED
+gcc -o gauss gauss_eliminate.c compute_gold.c -lpthread -std=c99 -w -lm -D MATRIX_SIZE=4096 -D NUM_THREADS=32
+./gauss
+
+Performing gaussian elimination using the reference code.
+CPU run time = 181.54 s.
+Single-threaded Gaussian elimination was successful.
+
+Performing gaussian elimination using the pthread implementation.
+CPU run time = 24.71 s.
+Multi-threaded Gaussian elimination was successful.
+
+Test PASSED
+[sem376@xunil-05 sourceCode]$
+
