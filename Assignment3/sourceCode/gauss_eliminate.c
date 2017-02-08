@@ -16,17 +16,18 @@
 
 #define MIN_NUMBER 2
 #define MAX_NUMBER 50
-#define NUM_THREADS 4
+/*#define NUM_THREADS 8*/
 
 /* Struct for passing to parallel function*/
-struct Args{
+typedef struct arguments{
+  unsigned int id;
   unsigned int start; 
   unsigned int stop;
   float *src;
   unsigned int num_elements;
-};
+  unsigned int diagonal;
+} ARGS;
 
-void *gauss_parallel(void *arg);
 void *gauss_reduction(void *arg);
 void *gauss_elimination(void *arg);
 
@@ -130,73 +131,135 @@ main (int argc, char **argv)
 void
 gauss_eliminate_using_pthreads (Matrix A)
 {
-  struct Args *args = malloc(sizeof(struct Args)); 
-  unsigned int start, stop;
-  unsigned int step;
+  ARGS *args;
+  unsigned int start, stop, num_elements, remainder, step, offset;
   
   pthread_t *thread_handles = malloc(NUM_THREADS * sizeof(pthread_t));
 
-  step = MATRIX_SIZE / NUM_THREADS;
-  for(int i = 0; i < NUM_THREADS; i++)
+  unsigned int i, j, k, diag;
+  num_elements = A.num_rows;
+  float *U = A.elements;
+
+  // Main outer loop 
+  for (k = 0; k < num_elements; k++)
   {
-    start = i * step;
-    stop = start + step;
+    // TODO: pthread(gauss_reduction)
+    offset = k + 1;
     
-    args->start = start;
-    args->stop = stop;
-    args->src = A.elements;
-    args->num_elements = A.num_rows;
+    if(offset < num_elements)
+    {
+      step = (num_elements - offset) / NUM_THREADS;
+      remainder = (num_elements - offset) % NUM_THREADS;
+    }
+    else
+    {
+      step = 0;
+      remainder = 0;
+    }
+    /*printf("Offset: %d, Step: %d, Rem: %d\n",offset, step, remainder);*/
     
-    pthread_create(&thread_handles[i], NULL, gauss_parallel, (void *)args);
+    for(int i = 0; i < NUM_THREADS; i++)
+    {
+      args = (ARGS *)malloc(sizeof(ARGS)); 
+      
+      start = (i * step) + offset;
+      stop = (i == NUM_THREADS - 1) ? (start + step + remainder) : (start + step);
+      
+      /*printf("Start: %d, Stop: %d\n\n", start, stop);*/
+      args->id = i;
+      args->start = start;
+      args->stop = stop;
+      args->src = U;
+      args->num_elements = A.num_rows;
+      args->diagonal = k;
+      
+      pthread_create(&thread_handles[i], NULL, gauss_reduction, (void *)args);
+      /*free(args);*/
+    }
+    // Rejoin the threads
+    for(int i = 0; i < NUM_THREADS; i++)
+      pthread_join(thread_handles[i], NULL);
+
+    /*break;*/
+    // Set the principal diagonal entry in U to be 1
+    U[num_elements * k + k] = 1;	 
     
+    // TODO: pthread(gauss_elimination)
+    for(int i = 0; i < NUM_THREADS; i++)
+    {
+      args = (ARGS *)malloc(sizeof(ARGS)); 
+      
+      start = (i * step) + offset;
+      stop = (i == NUM_THREADS - 1) ? (start + step + remainder) : (start + step);
+      
+      /*printf("Start: %d, Stop: %d\n\n", start, stop);*/
+      args->id = i;
+      args->start = start;
+      args->stop = stop;
+      args->src = U;
+      args->num_elements = A.num_rows;
+      args->diagonal = k;
+      
+      pthread_create(&thread_handles[i], NULL, gauss_elimination, (void *)args);
+      /*free(args);*/
+    }
+    // Rejoin the threads
+    for(int i = 0; i < NUM_THREADS; i++)
+      pthread_join(thread_handles[i], NULL);
   }
 }
 
-void* gauss_parallel(void *arg)
+// TODO: turn this parallel : - Done!
+void* gauss_reduction(void *arg)
 {
-  unsigned int i, j, k;
-  struct Args *current = (struct Args*)arg;
-  unsigned int start, num_elements;
+  unsigned int i, j, k, id;
+  ARGS *current = (ARGS*)arg;
+  unsigned int start, stop, num_elements;
   
+  // Setting up thread information
   float *U = (*current).src;
   start = (*current).start;
   num_elements = (*current).num_elements;
+  id = (*current).id;
+  k = (*current).diagonal; // This is the diagonal divisor of the division step
+  stop = (*current).stop;
 
-  for (k = start; k < num_elements; k++)
-  {
-    // TODO: pthread(gauss_reduction)
-    // Set the principal diagonal entry in U to be 1
-    U[num_elements * k + k] = 1;	 
-    // TODO: pthread(gauss_elimination)
-    
-  }
-}
-
-// TODO: turn this parallel
-void* gauss_reduction(void *arg)
-{
-  for (j = (k + 1); j < num_elements; j++)
+  /*printf("ID: %d, Start: %d, Stop: %d\n", k, start, stop);*/
+  for (j = start; j < stop; j++)
   {			
     // Reduce the current row
     if (U[num_elements * k + k] == 0)
       {
         printf("Numerical instability detected. The principal diagonal element is zero. \n");
-        /*break;*/
       }
-
       // Division step
       U[num_elements * k + j] = (float) (U[num_elements * k + j] / U[num_elements * k + k]);
   }
 }
+
 // TODO: turn this parallel
 void* gauss_elimination(void *arg)
 {
+  unsigned int i, j, k, id;
+  ARGS *current = (ARGS*)arg;
+  unsigned int start, stop, num_elements;
+  
+  // Setting up thread information
+  float *U = (*current).src;
+  start = (*current).start;
+  num_elements = (*current).num_elements;
+  id = (*current).id;
+  k = (*current).diagonal; // This is the diagonal divisor of the division step
+  stop = (*current).stop;
 
-  for (i = (k + 1); i < num_elements; i++)
+  for (i = start; i < stop; i++)
   {
     for (j = (k + 1); j < num_elements; j++)
+    {
       // Elimination step
-      U[num_elements * i + j] = U[num_elements * i + j] - (U[num_elements * i + k] * U[num_elements * k + j]);	
+      U[num_elements * i + j] = U[num_elements * i + j] - (U[num_elements * i + k] * U[num_elements * k + j]);
+    }
+
     U[num_elements * i + k] = 0;
   }
 }
